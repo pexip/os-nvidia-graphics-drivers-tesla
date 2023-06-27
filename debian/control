@@ -3,8 +3,9 @@
 Source: nvidia-graphics-drivers-tesla
 Section: non-free/libs
 Priority: optional
-Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
-Uploaders:
+Maintainer: Pexip AS <packaging@pexip.com>
+XSBC-Pexip-Original-Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+XSBC-Pexip-Original-Uploaders:
  Andreas Beckmann <anbe@debian.org>,
  Luca Boccassi <bluca@debian.org>,
 Vcs-Browser: https://salsa.debian.org/nvidia-team/nvidia-graphics-drivers
@@ -30,6 +31,7 @@ Standards-Version: 4.6.2
 Homepage: https://www.nvidia.com
 Testsuite: autopkgtest-pkg-dkms
 XS-Autobuild: yes
+XS-Pexip-Upstream: http://ftp.debian.org/debian/ bookworm
 
 Package: nvidia-tesla-driver
 Section: non-free/x11
