@@ -7,7 +7,7 @@ PACKAGE_VERSION="#VERSION#"
 BUILD_EXCLUSIVE_KERNEL="^(3\.[1-9][0-9]|[4-9]\.)"
 
 # The NVIDIA driver does not support real-time kernels.
-BUILD_EXCLUSIVE_CONFIG="!CONFIG_PREEMPT_RT !CONFIG_PREEMPT_RT_FULL"
+[[ "$kernelver" =~ "-rt-" ]] && build_exclude="yes"
 
 AUTOINSTALL=yes
 
