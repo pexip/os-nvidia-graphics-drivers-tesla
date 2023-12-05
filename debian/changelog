@@ -1,3 +1,9 @@
+nvidia-graphics-drivers-tesla (525.105.17-1pexip2) pexip-bookworm; urgency=medium
+
+  * Rebuild for bookworm.
+
+ -- Mark Hymers <mark.hymers@pexip.com>  Tue, 05 Dec 2023 14:49:21 +0000
+
 nvidia-graphics-drivers-tesla (525.105.17-1pexip1) pexip; urgency=medium
 
   * Prepare Pexip packaging
