@@ -1,0 +1,18 @@
+# Names and locations required by the .service files.
+no-manual-page [usr/bin/nvidia-sleep.sh]
+script-with-language-extension [usr/bin/nvidia-sleep.sh]
+executable-in-usr-lib [usr/lib/systemd/system-sleep/nvidia]
+
+systemd-service-file-refers-to-unusual-wantedby-target systemd-hibernate.service [usr/lib/systemd/system/nvidia-hibernate.service]
+systemd-service-file-refers-to-unusual-wantedby-target systemd-hibernate.service [usr/lib/systemd/system/nvidia-resume.service]
+systemd-service-file-refers-to-unusual-wantedby-target systemd-suspend.service [usr/lib/systemd/system/nvidia-resume.service]
+systemd-service-file-refers-to-unusual-wantedby-target systemd-suspend.service [usr/lib/systemd/system/nvidia-suspend.service]
+package-supports-alternative-init-but-no-init.d-script [usr/lib/systemd/system/nvidia-hibernate.service]
+package-supports-alternative-init-but-no-init.d-script [usr/lib/systemd/system/nvidia-resume.service]
+package-supports-alternative-init-but-no-init.d-script [usr/lib/systemd/system/nvidia-suspend.service]
+systemd-service-file-missing-documentation-key [usr/lib/systemd/system/nvidia-hibernate.service]
+systemd-service-file-missing-documentation-key [usr/lib/systemd/system/nvidia-resume.service]
+systemd-service-file-missing-documentation-key [usr/lib/systemd/system/nvidia-suspend.service]
+
+# We do not build arch:all packages from the proprietary driver.
+package-contains-no-arch-dependent-files

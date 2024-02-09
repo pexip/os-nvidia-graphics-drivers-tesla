@@ -178,6 +178,9 @@ Description: NVIDIA binary kernel module DKMS source${nvidia:VariantDesc}
  for a complete list of supported GPUs and PCI IDs.
  .
  Building the kernel modules has been tested up to Linux ${nvidia:kmod:tested:Linux}.
+ .
+ Note: The new 'non-free-firmware' archive area has to be enabled in apt's
+ sources.list(.d/) in order to install firmware-${nvidia}-gsp.
 
 Package: ${nvidia-kernel}-source
 Section: non-free/kernel
@@ -226,6 +229,7 @@ Recommends:
  ${nvidia}-driver (>= ${nvidia:Version}),
  ${nvidia}-vdpau-driver (>= ${nvidia:Version}),
  ${nvidia:kmod:binary},
+# nvidia-suspend-common,
  ${nvidia-settings},
 Suggests:
  ${nvidia:kmod:source},
@@ -243,6 +247,16 @@ Description: NVIDIA binary Xorg driver${nvidia:VariantDesc}
  .
  See /usr/share/doc/${nvidia}-driver/README.txt.gz
  for a complete list of supported GPUs and PCI IDs.
+
+Package: nvidia-suspend-common
+Section: non-free/x11
+Architecture: #amd64 arm64 ppc64el
+Multi-Arch: foreign
+Depends:
+ ${misc:Depends}
+Description: NVIDIA driver - systemd power management scripts
+ This package provides the common files for the NVIDIA power management
+ integration with systemd.
 
 Package: ${nvidia}-legacy-check
 Architecture: amd64 ${arch:arm64} ${arch:ppc64el}
@@ -745,7 +759,7 @@ Depends:
 Recommends:
  lib${nvidia}-rtcore (= ${binary:Version}) [!i386 !ppc64el],
 Suggests:
- vulkan-utils,
+ vulkan-tools,
 Enhances:
  libvulkan1,
 Provides:
@@ -1023,7 +1037,7 @@ Description: NVENC Video Encoding runtime library${nvidia:VariantDesc}
  This package contains the nvidia-encode runtime library.
 
 Package: lib${nvidia}-fbc1
-Architecture: i386 amd64
+Architecture: i386 amd64 ${arch:arm64}
 Multi-Arch: same
 Pre-Depends:
  ${misc:Pre-Depends}
