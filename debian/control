@@ -180,6 +180,9 @@ Description: NVIDIA binary kernel module DKMS source${nvidia:VariantDesc}
  for a complete list of supported GPUs and PCI IDs.
  .
  Building the kernel modules has been tested up to Linux ${nvidia:kmod:tested:Linux}.
+ .
+ Note: The new 'non-free-firmware' archive area has to be enabled in apt's
+ sources.list(.d/) in order to install firmware-${nvidia}-gsp.
 
 Package: nvidia-tesla-kernel-source
 Section: non-free/kernel
@@ -555,7 +558,7 @@ Depends:
 Recommends:
  lib${nvidia}-rtcore (= ${binary:Version}) [!i386 !ppc64el],
 Suggests:
- vulkan-utils,
+ vulkan-tools,
 Enhances:
  libvulkan1,
 Provides:
@@ -815,7 +818,7 @@ Description: NVENC Video Encoding runtime library${nvidia:VariantDesc}
  This package contains the nvidia-encode runtime library.
 
 Package: libnvidia-tesla-fbc1
-Architecture: i386 amd64
+Architecture: i386 amd64 arm64
 Multi-Arch: same
 Pre-Depends:
  ${misc:Pre-Depends}

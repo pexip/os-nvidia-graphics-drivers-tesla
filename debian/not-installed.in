@@ -51,12 +51,17 @@ libGLX.so.0
 libGLdispatch.so.0
 libOpenGL.so.0
 
-# shipped unversioned by src:nvidia-graphics-drivers-tesla
+# shipped in nvidia-cuda-mps from src:nvidia-graphics-drivers-tesla-470
 nvidia-cuda-mps-control
 nvidia-cuda-mps-control.1
 nvidia-cuda-mps-server
-nvidia-powerd
-nvidia-dbus.conf
+
+# shipped in nvidia-suspend-common from src:nvidia-graphics-drivers-tesla
+systemd/system/nvidia-suspend.service
+systemd/system/nvidia-hibernate.service
+systemd/system/nvidia-resume.service
+systemd/system-sleep/nvidia
+systemd/nvidia-sleep.sh
 
 # shipped unversioned by src:nvidia-graphics-drivers
 10_nvidia.json
@@ -70,5 +75,3 @@ libOpenCL.so.1.0.0
 nvidia-ngx-updater
 
 libEGL.so.#VERSION#
-
-libnvidia-compiler-next.so.#VERSION#

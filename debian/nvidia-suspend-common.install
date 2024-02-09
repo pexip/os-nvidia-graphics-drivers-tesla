@@ -1,0 +1,5 @@
+systemd/system/nvidia-suspend.service	usr/lib/systemd/system/
+systemd/system/nvidia-hibernate.service	usr/lib/systemd/system/
+systemd/system/nvidia-resume.service	usr/lib/systemd/system/
+systemd/system-sleep/nvidia		usr/lib/systemd/system-sleep/
+systemd/nvidia-sleep.sh			usr/bin/

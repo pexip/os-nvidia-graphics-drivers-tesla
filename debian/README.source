@@ -29,12 +29,13 @@ Upstream support timeframes
     Tesla 410                   EoL
     Tesla 418 (LTSB)    03/2022 EoL
     Tesla 440           11/2020 EoL
-    Tesla 450 (LTSB)    07/2023
+    Tesla 450 (LTSB)    07/2023 EoL
     Tesla 460 (PB)      01/2022 EoL
     Tesla 470 (LTSB)    07/2024
     Tesla 510 (PB)      01/2023 EoL
-    Tesla 515 (PB)      05/2023
+    Tesla 515 (PB)      05/2023 EoL
     Tesla 525 (PB)      12/2023
+    Tesla 535 (LTSB)    06/2026
 
 
 The branch structure in the GIT repository
@@ -60,27 +61,23 @@ The branch structure in the GIT repository
     418-bullseye        EoL   (bullseye)          450, 418-tesla
     418-tesla           EoL   (bullseye)          450-tesla, tesla-418/main
     tesla-418/main      EoL   bullseye,sid        tesla-450/main
-    450                       (bullseye)          460, 450-tesla
-    450-tesla                 (bullseye)          460-tesla, tesla-450/main
-    tesla-450/main            bullseye,sid        tesla-460/main
+    450                 EoL   (bullseye)          460, 450-tesla
+    450-tesla           EoL   (bullseye)          460-tesla, tesla-450/main
+    tesla-450/main      EoL   (bullseye),(sid)    tesla-460/main, tesla-450/transition-470
+    tesla-450/transition-470  bullseye,sid        tesla-460/transition-470
     460                 EoL   (bullseye)          470, 460-tesla
     460-tesla           EoL   (bullseye)          470-tesla, tesla-460/main
     tesla-460/main      EoL   (bullseye),(sid)    tesla-470/main, tesla-460/transition-470
     tesla-460/transition-470  bullseye,sid
-    470                       bullseye            510, 470-tesla
-    470-tesla                 (bullseye)          510-tesla, tesla-470/main
-    tesla-470/main            bullseye,bookworm,sid tesla-510/main
-    510                 EoL   (bookworm),sid      515, 510-tesla
-    510-tesla           EoL   (bookworm)          515-tesla, tesla-510/main
-    tesla-510/main      EoL   (bookworm),(sid)    tesla/510, tesla-510/transition
-    tesla-510/transition      sid
-    tesla/510           EoL   (bookworm),sid      tesla/515
-    515                       (bookworm),sid      525, 515-tesla
-    515-tesla                 (bookworm)          525-tesla, tesla/515
-    tesla/515                 (bookworm),sid      tesla/525
-    525                       (bookworm),sid      YYY, 525-tesla
-    525-tesla                 (bookworm)          ZZZ-tesla, tesla/525
-    tesla/525                 (bookworm),sid      tesla/ZZZ
+    470                       bullseye            525, 470-tesla
+    470-tesla                 (bullseye)          525-tesla, tesla-470/main
+    tesla-470/main            bullseye,bookworm,sid tesla/525
+    525                       bookworm,sid        535, 525-tesla
+    525-tesla                 (bookworm)          535-tesla, tesla/525
+    tesla/525                 bookworm,sid        tesla/535
+    535                       bookworm,sid        YYY, 535-tesla
+    535-tesla                 (bookworm)          ZZZ-tesla, tesla/535
+    tesla/535                 bookworm,sid        tesla/ZZZ
     main                      sid                 YYY
     tesla/main                sid
     YYY                       experimental        ZZZ, (main)

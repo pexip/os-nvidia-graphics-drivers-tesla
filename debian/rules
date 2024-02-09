@@ -6,6 +6,8 @@
 include /usr/share/dpkg/architecture.mk
 include /usr/share/dpkg/pkg-info.mk
 
+NVIDIA_RELEASE		 = $(DEB_VERSION_UPSTREAM)
+NVIDIA_MAJOR		 = $(firstword $(subst ., ,$(NVIDIA_RELEASE)))
 include debian/rules.defs
 NVIDIA_TESLA		?=
 NVIDIA_LEGACY		?=
@@ -17,16 +19,15 @@ XORG_BOUND		?=
 LINUX_KMOD_VARIANT	?=
 LINUX_KMOD_TESTED	?=
 NVIDIA_LEGACY_CHECK	?=
-NVIDIA_SETTINGS		?= nvidia-settings$(-variant)
+NVIDIA_SETTINGS		?= nvidia-settings$(-variant) (>= $(NVIDIA_MAJOR))
 ARCH_CANDIDATES		?= amd64 i386 armhf arm64 ppc64el
 ARCH_LIST		?= amd64
 NO_DRIVER_ARCH_LIST	?=
 NO_AUTOPKGTEST_ARCH_LIST?=
 NO_GSP_ARCH_LIST	?=
 
-NVIDIA_RELEASE		 = $(DEB_VERSION_UPSTREAM)
 version			 = $(NVIDIA_RELEASE)
-version_major		 = $(firstword $(subst ., ,$(version)))
+version_major		 = $(NVIDIA_MAJOR)
 ifeq (yes,$(NVIDIA_TESLA))
 variant			 = $(if $(NVIDIA_TESLA),tesla)
 variant_description	 = $(if $(NVIDIA_TESLA), (Tesla version))
@@ -244,6 +245,8 @@ override_dh_auto_clean:
 
 execute_after_dh_clean:
 	$(RM) $(AUTOCLEAN)
+	md5sum --check debian/control.md5sum --status || \
+		touch debian/rules.defs
 	$(MAKE) -f debian/rules $(AUTOKEEP)
 # this will fail unless debian/control{,.md5sum} is up-to-date
 	md5sum --check debian/control.md5sum --status || \
@@ -309,7 +312,7 @@ pack-module-source:
 	$(RM) -r $(module_source_pkg)/usr/src/modules
 
 # only invoked manually
-kernel-source-tree: unpack-stamp
+kernel-source-tree: unpack-stamp $(AUTOGEN)
 	$(RM) -r $@
 	cp -a NVIDIA-Linux/kernel $@
 	cd $@ && QUILT_PATCHES=../debian/patches/module quilt --quiltrc /dev/null push -a || test $$? = 2
@@ -329,6 +332,9 @@ endif
 
 override_dh_installchangelogs:
 	dh_installchangelogs debian/tmp/NVIDIA_Changelog
+
+override_dh_installsystemd:
+	dh_installsystemd --no-start --no-stop-on-upgrade --no-restart-after-upgrade
 
 override_dh_bugfiles:
 	dh_bugfiles -A

@@ -1,4 +1,4 @@
-From 07730be40239a5ec2c1c3754807e026a1b41fcfe Mon Sep 17 00:00:00 2001
+From fe3344d88a7c56419d42de6efef5161031c77928 Mon Sep 17 00:00:00 2001
 From: Andreas Beckmann <anbe@debian.org>
 Date: Mon, 31 Oct 2022 15:10:08 +0100
 Subject: [PATCH] bump minimum supported kernel version to 3.10
@@ -9,7 +9,7 @@ conftest.sh has dropped several tests for features predating 3.10
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/common/inc/nv-linux.h b/common/inc/nv-linux.h
-index eeba17d..782e42a 100644
+index 792287b..9f32e4e 100644
 --- a/common/inc/nv-linux.h
 +++ b/common/inc/nv-linux.h
 @@ -57,8 +57,8 @@
