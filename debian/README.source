@@ -34,7 +34,7 @@ Upstream support timeframes
     Tesla 470 (LTSB)    07/2024
     Tesla 510 (PB)      01/2023 EoL
     Tesla 515 (PB)      05/2023 EoL
-    Tesla 525 (PB)      12/2023
+    Tesla 525 (PB)      12/2023 EoL
     Tesla 535 (LTSB)    06/2026
 
 
@@ -43,51 +43,40 @@ The branch structure in the GIT repository
     The following branches exist in the git repository:
 
     branch                    upload to           merge into
-                              (compatible with)   (reintegrate into)
+    (obsolete branch)         (compatible with)   (reintegrate into)
 
-    {71,96,173}xx/*     EoL
-    304                 EoL   wheezy              304-jessie
-    304-jessie          EoL   (jessie)            304-stretch, 340, 304xx/jessie
-    304-stretch         EoL   (stretch)           340-stretch, 304xx/master
-    304xx/jessie        EoL   jessie              304xx/master
-    304xx/master        EoL   stretch,sid
-    340                 EoL   jessie              340-stretch
-    340-stretch         EoL   (stretch,sid)       390, 340xx/main
+    ({71,96,173}xx/*)   EoL
+    (304)               EoL   wheezy              304-jessie
+    (304-jessie)        EoL   (jessie)            304-stretch, 340-jessie, 304xx/jessie
+    (304-stretch)       EoL   (stretch)           340, 304xx/master
+    (304xx/jessie)      EoL   jessie              304xx/master
+    (304xx/master)      EoL   stretch,sid
+    (340-jessie)        EoL   jessie              340
+    340                 EoL   (stretch)           390, 340xx/main
     340xx/main          EoL   stretch,buster,sid
-    390                 EoL   stretch             390-buster
-    390-buster          EoL   (buster)            418, 390xx/main
+    (390-stretch)       EoL   stretch             390
+    390                 EoL   (buster)            418, 390xx/main
     390xx/main          EoL   buster,bullseye,sid
-    418                 EoL   buster              418-bullseye
-    418-bullseye        EoL   (bullseye)          450, 418-tesla
-    418-tesla           EoL   (bullseye)          450-tesla, tesla-418/main
+    (418-buster)        EoL   buster              418
+    418                 EoL   (bullseye)          450, tesla-418/main
     tesla-418/main      EoL   bullseye,sid        tesla-450/main
-    450                 EoL   (bullseye)          460, 450-tesla
-    450-tesla           EoL   (bullseye)          460-tesla, tesla-450/main
+    450                 EoL   (bullseye)          460, tesla-450/main
     tesla-450/main      EoL   (bullseye),(sid)    tesla-460/main, tesla-450/transition-470
     tesla-450/transition-470  bullseye,sid        tesla-460/transition-470
-    460                 EoL   (bullseye)          470, 460-tesla
-    460-tesla           EoL   (bullseye)          470-tesla, tesla-460/main
+    460                 EoL   (bullseye)          470, tesla-460/main
     tesla-460/main      EoL   (bullseye),(sid)    tesla-470/main, tesla-460/transition-470
-    tesla-460/transition-470  bullseye,sid
-    470                       bullseye            525, 470-tesla
-    470-tesla                 (bullseye)          525-tesla, tesla-470/main
+    tesla-460/transition-470  bullseye,sid        tesla/transition
+    470                       bullseye            525, tesla-470/main
     tesla-470/main            bullseye,bookworm,sid tesla/525
-    525                       bookworm,sid        535, 525-tesla
-    525-tesla                 (bookworm)          535-tesla, tesla/525
-    tesla/525                 bookworm,sid        tesla/535
-    535                       bookworm,sid        YYY, 535-tesla
-    535-tesla                 (bookworm)          ZZZ-tesla, tesla/535
-    tesla/535                 bookworm,sid        tesla/ZZZ
-    main                      sid                 YYY
-    tesla/main                sid
-    YYY                       experimental        ZZZ, (main)
-    ZZZ                       experimental        (main)
-    ZZZ-tesla                 (experimental)      tesla/ZZZ
-    tesla/ZZZ                 experimental        (tesla/main)
+    525                 EoL   bookworm,sid        535, tesla/525
+    tesla/525           EoL   (bookworm),(sid)    tesla/transition
+    tesla/transition          bookworm,sid
+    535                       bookworm,sid        YYY
+    YYY                       experimental        ZZZ
+    ZZZ                       experimental
     *-backports               *-backports
     ABCxx/*-backports         *-backports
     tesla-ABC/*-backports     *-backports
-    tesla/*-backports         *-backports
 
     New upstream releases (XXX.yy[.zz]) are always imported into the XXX
     branch. If this branch does not yet exist, fork it from ZZZ (but do
@@ -98,7 +87,7 @@ The branch structure in the GIT repository
     currently used used for both stable and sid.
 
     Minor updates, fixes and features should always go to the oldest branch
-    where they are applicable, i.e. 340-stretch (or 390) in most cases.
+    where they are applicable, i.e. 340 (or 390) in most cases.
 
     The following packages have hardcoded lists of alternative dependencies
     that need to be updated whenever the list of supported driver packages

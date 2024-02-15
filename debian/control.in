@@ -11,7 +11,6 @@ Build-Depends:
  debhelper-compat (= 13),
 Build-Depends-Arch:
  dh-sequence-dkms,
- dh-dkms (>= 3.0.3-4~),
  dh-exec,
  libnvidia-egl-wayland1,
  libvulkan1 (>= 1.0.42),
@@ -32,28 +31,29 @@ XS-Autobuild: yes
 Package: ${nvidia}-driver
 Section: non-free/x11
 Architecture: amd64 ${arch:arm64} ${arch:ppc64el}
-Pre-Depends:
- nvidia-installer-cleanup,
- ${nvidia:legacy-check},
+#Pre-Depends:
+# nvidia-installer-cleanup,
+# ${nvidia:legacy-check},
 Depends:
- ${nvidia}-driver-libs (= ${binary:Version}),
- ${nvidia}-driver-bin (= ${binary:Version}),
- xserver-xorg-video-${nvidia} (= ${binary:Version}),
- ${nvidia}-vdpau-driver (= ${binary:Version}),
- ${nvidia}-alternative (= ${binary:Version}),
- ${nvidia:kmod:binary},
- nvidia-support,
+ nvidia-driver,
+# ${nvidia}-driver-libs (= ${binary:Version}),
+# ${nvidia}-driver-bin (= ${binary:Version}),
+# xserver-xorg-video-${nvidia} (= ${binary:Version}),
+# ${nvidia}-vdpau-driver (= ${binary:Version}),
+# ${nvidia}-alternative (= ${binary:Version}),
+# ${nvidia:kmod:binary},
+# nvidia-support,
  ${misc:Depends}
-Recommends:
- ${nvidia-settings},
-# help nvidia-persistenced by pre-selecting the correct provider for libnvidia-cfg1-any
- lib${nvidia}-cfg1 (= ${binary:Version}),
- nvidia-persistenced,
-Suggests:
- ${nvidia:kmod:source},
-Provides:
- nvidia-driver-any,
- nvidia-glx-any,
+#Recommends:
+# ${nvidia-settings},
+## help nvidia-persistenced by pre-selecting the correct provider for libnvidia-cfg1-any
+# lib${nvidia}-cfg1 (= ${binary:Version}),
+# nvidia-persistenced,
+#Suggests:
+# ${nvidia:kmod:source},
+#Provides:
+# nvidia-driver-any,
+# nvidia-glx-any,
 Description: NVIDIA metapackage${nvidia:VariantDesc}
  This metapackage depends on the NVIDIA binary driver and libraries
  that provide optimized hardware acceleration of
@@ -115,7 +115,7 @@ Multi-Arch: foreign
 Depends:
  ${misc:Depends}
 Provides:
- firmware-${nvidia}-gsp (= ${nvidia:Version}) [${nvidia:archlist:gsp}],
+# firmware-${nvidia}-gsp (= ${nvidia:Version}) [${nvidia:archlist:gsp}],
  firmware-nvidia-gsp-${nvidia:Version} [${nvidia:archlist:gsp}],
 Conflicts:
  firmware-nvidia-gsp-${nvidia:Version} [${nvidia:archlist:gsp}],
@@ -137,7 +137,7 @@ Depends:
  nvidia-modprobe (>= ${nvidia:Version:major}),
  ${misc:Depends}
 Provides:
- nvidia-kernel-support-any,
+# nvidia-kernel-support-any,
  ${nvidia-kernel}-support--v1,
 Description: NVIDIA binary kernel module support files${nvidia:VariantDesc}
  The NVIDIA binary driver provides optimized hardware acceleration of
@@ -150,18 +150,19 @@ Package: ${nvidia-kernel}-dkms
 Section: non-free/kernel
 Architecture: amd64 ${arch:arm64} ${arch:ppc64el}
 Multi-Arch: foreign
-Pre-Depends:
- nvidia-installer-cleanup,
+#Pre-Depends:
+# nvidia-installer-cleanup,
 Depends:
- firmware-${nvidia}-gsp (= ${nvidia:Version}) [${nvidia:archlist:gsp}] | firmware-nvidia-gsp-${nvidia:Version} [${nvidia:archlist:gsp}],
- ${nvidia-kernel}-support--v1,
+ nvidia-kernel-dkms,
+# firmware-${nvidia}-gsp (= ${nvidia:Version}) [${nvidia:archlist:gsp}] | firmware-nvidia-gsp-${nvidia:Version} [${nvidia:archlist:gsp}],
+# ${nvidia-kernel}-support--v1,
  ${misc:Depends}
-Recommends:
- ${nvidia}-driver (>= ${nvidia:Version})
- | ${libcuda1} (>= ${nvidia:Version}),
-Provides:
- ${nvidia-kernel}-${nvidia:Version},
- nvidia-kernel-dkms-any (= ${nvidia:Version}),
+#Recommends:
+# ${nvidia}-driver (>= ${nvidia:Version})
+# | ${libcuda1} (>= ${nvidia:Version}),
+#Provides:
+# ${nvidia-kernel}-${nvidia:Version},
+# nvidia-kernel-dkms-any (= ${nvidia:Version}),
 Description: NVIDIA binary kernel module DKMS source${nvidia:VariantDesc}
  This package builds the NVIDIA binary kernel modules needed by
  ${nvidia}-driver, using DKMS.
@@ -187,14 +188,15 @@ Package: ${nvidia-kernel}-source
 Section: non-free/kernel
 Architecture: amd64 ${arch:arm64} ${arch:ppc64el}
 Depends:
- debhelper-compat (= ${nvidia:debhelper-compat}),
- module-assistant,
+ nvidia-kernel-source,
+# debhelper-compat (= ${nvidia:debhelper-compat}),
+# module-assistant,
  ${misc:Depends}
-Recommends:
- firmware-${nvidia}-gsp (= ${nvidia:Version}) [${nvidia:archlist:gsp}] | firmware-nvidia-gsp-${nvidia:Version} [${nvidia:archlist:gsp}],
- ${nvidia-kernel}-support--v1,
-Suggests:
- ${nvidia}-driver (>= ${nvidia:Version}),
+#Recommends:
+# firmware-${nvidia}-gsp (= ${nvidia:Version}) [${nvidia:archlist:gsp}] | firmware-nvidia-gsp-${nvidia:Version} [${nvidia:archlist:gsp}],
+# ${nvidia-kernel}-support--v1,
+#Suggests:
+# ${nvidia}-driver (>= ${nvidia:Version}),
 Description: NVIDIA binary kernel module source${nvidia:VariantDesc}
  This package provides the source for the NVIDIA binary kernel modules
  needed by ${nvidia}-driver in a form suitable
@@ -218,25 +220,26 @@ Description: NVIDIA binary kernel module source${nvidia:VariantDesc}
 Package: xserver-xorg-video-${nvidia}
 Section: non-free/x11
 Architecture: amd64 ${arch:arm64} ${arch:ppc64el}
-Pre-Depends:
- nvidia-installer-cleanup,
- ${nvidia:legacy-check},
+#Pre-Depends:
+# nvidia-installer-cleanup,
+# ${nvidia:legacy-check},
 Depends:
+ xserver-xorg-video-nvidia,
  ${nvidia}-alternative (= ${binary:Version}),
- nvidia-support,
- ${nvidia:xorgDepends},
+# nvidia-support,
+# ${nvidia:xorgDepends},
  ${shlibs:Depends}, ${misc:Depends}
-Recommends:
- ${nvidia}-driver (>= ${nvidia:Version}),
- ${nvidia}-vdpau-driver (>= ${nvidia:Version}),
- ${nvidia:kmod:binary},
+#Recommends:
+# ${nvidia}-driver (>= ${nvidia:Version}),
+# ${nvidia}-vdpau-driver (>= ${nvidia:Version}),
+# ${nvidia:kmod:binary},
 # nvidia-suspend-common,
- ${nvidia-settings},
-Suggests:
- ${nvidia:kmod:source},
-Provides:
- xserver-xorg-video-nvidia-any,
- ${nvidia:xorgProvides},
+# ${nvidia-settings},
+#Suggests:
+# ${nvidia:kmod:source},
+#Provides:
+# xserver-xorg-video-nvidia-any,
+# ${nvidia:xorgProvides},
 Description: NVIDIA binary Xorg driver${nvidia:VariantDesc}
  The NVIDIA binary driver provides optimized hardware acceleration of
  OpenGL/GLX/EGL/GLES applications via a direct-rendering X Server
@@ -254,6 +257,7 @@ Section: non-free/x11
 Architecture: #amd64 arm64 ppc64el
 Multi-Arch: foreign
 Depends:
+ kbd,
  ${misc:Depends}
 Description: NVIDIA driver - systemd power management scripts
  This package provides the common files for the NVIDIA power management
@@ -300,11 +304,12 @@ Multi-Arch: same
 Pre-Depends:
  ${misc:Pre-Depends}
 Depends:
+ libnvidia-cfg1,
  ${nvidia}-alternative (= ${binary:Version}),
  ${shlibs:Depends}, ${misc:Depends}
-Provides:
- libnvidia-cfg.so.1 (= ${nvidia:Version}),
- libnvidia-cfg1-any,
+#Provides:
+# libnvidia-cfg.so.1 (= ${nvidia:Version}),
+# libnvidia-cfg1-any,
 Description: NVIDIA binary OpenGL/GLX configuration library${nvidia:VariantDesc}
  The NVIDIA binary driver provides optimized hardware acceleration of
  OpenGL/GLX/EGL/GLES applications via a direct-rendering X Server
@@ -316,21 +321,22 @@ Package: ${nvidia}-driver-libs
 Architecture: i386 amd64 ${arch:arm64} ${arch:ppc64el}
 Multi-Arch: same
 Depends:
- libgl1-${nvidia}-glvnd-glx (= ${binary:Version}),
- ${nvidia}-egl-icd (= ${binary:Version}),
+ nvidia-driver-libs,
+# libgl1-${nvidia}-glvnd-glx (= ${binary:Version}),
+# ${nvidia}-egl-icd (= ${binary:Version}),
  ${misc:Depends}
-Recommends:
- ${nvidia}-driver-libs:i386 (= ${binary:Version}) [amd64],
- libopengl0 | libopengl0-glvnd-nvidia,
- libglx-${nvidia-}0 (= ${binary:Version}),
- libgles-${nvidia-}1 (= ${binary:Version}),
- libgles-${nvidia-}2 (= ${binary:Version}),
- lib${nvidia}-cfg1 (= ${binary:Version}) [${nvidia:archlist:driver}],
- lib${nvidia}-encode1 (= ${binary:Version}),
- ${nvidia}-vulkan-icd (= ${binary:Version}),
- lib${nvidia}-allocator1 (= ${binary:Version}),
-Provides:
- nvidia-driver-libs-any,
+#Recommends:
+# ${nvidia}-driver-libs:i386 (= ${binary:Version}) [amd64],
+# libopengl0 | libopengl0-glvnd-nvidia,
+# libglx-${nvidia-}0 (= ${binary:Version}),
+# libgles-${nvidia-}1 (= ${binary:Version}),
+# libgles-${nvidia-}2 (= ${binary:Version}),
+# lib${nvidia}-cfg1 (= ${binary:Version}) [${nvidia:archlist:driver}],
+# lib${nvidia}-encode1 (= ${binary:Version}),
+# ${nvidia}-vulkan-icd (= ${binary:Version}),
+# lib${nvidia}-allocator1 (= ${binary:Version}),
+#Provides:
+# nvidia-driver-libs-any,
 Conflicts:
  libglvnd0-nvidia,
  libopengl0-glvnd-nvidia,
@@ -415,8 +421,8 @@ Depends:
  ${nvidia}-alternative (= ${binary:Version}),
  libglx0 | libglx0-glvnd-nvidia,
  ${shlibs:Depends}, ${misc:Depends}
-Provides:
- libglx-vendor,
+#Provides:
+# libglx-vendor,
 Description: NVIDIA binary GLX library${nvidia:VariantDesc}
  GLX ("OpenGL Extension to the X Window System") provides an interface between
  OpenGL and the X Window System as well as extensions to OpenGL itself.
@@ -456,8 +462,8 @@ Depends:
  libgl1 (>= 0.2.999) | libgl1-glvnd-nvidia-glx,
  libglx-${nvidia-}0 (= ${binary:Version}),
  ${misc:Depends}
-Provides:
- libgl1-nvidia-glx-any,
+#Provides:
+# libgl1-nvidia-glx-any,
 Description: NVIDIA binary OpenGL/GLX library (GLVND variant)${nvidia:VariantDesc}
  The NVIDIA binary driver provides optimized hardware acceleration of
  OpenGL/GLX/EGL/GLES applications via a direct-rendering X Server
@@ -667,7 +673,6 @@ Depends:
  ${misc:Depends}
 Suggests:
  libegl-${nvidia-}0 [i386 amd64 ${arch:arm64} ${arch:ppc64el}]
- | libegl-nvidia-tesla0 [i386 amd64 arm64 ppc64el]
  | libegl-nvidia-tesla-470-0 [i386 amd64 arm64 ppc64el]
 Description: NVIDIA binary EGL driver - common files
  EGL provides a platform-agnostic mechanism for creating rendering surfaces
@@ -684,11 +689,11 @@ Depends:
  libegl1 (>= 0.2.999) | libegl1-glvnd-nvidia,
  libegl-${nvidia-}0 (= ${binary:Version}),
  ${misc:Depends}
-Enhances:
- libegl1,
-Provides:
- libegl-vendor,
- egl-icd,
+#Enhances:
+# libegl1,
+#Provides:
+# libegl-vendor,
+# egl-icd,
 Description: NVIDIA EGL installable client driver (ICD)
  EGL provides a platform-agnostic mechanism for creating rendering surfaces
  for use with other graphics libraries, such as OpenGL|ES.
@@ -712,10 +717,10 @@ Recommends:
  ${nvidia:kmod:binary},
 Suggests:
  ${nvidia:kmod:source},
-Enhances:
- libvdpau1,
-Provides:
- vdpau-driver,
+#Enhances:
+# libvdpau1,
+#Provides:
+# vdpau-driver,
 Description: Video Decode and Presentation API for Unix - NVIDIA driver${nvidia:VariantDescShort}
  These libraries provide the Video Decode and Presentation API for Unix.
  They provide accelerated video playback (incl. H.264) for the supported
@@ -735,7 +740,6 @@ Depends:
  ${misc:Depends}
 Suggests:
  ${nvidia}-vulkan-icd [i386 amd64 ${arch:arm64} ${arch:ppc64el}]
- | nvidia-tesla-vulkan-icd [i386 amd64 arm64 ppc64el]
  | nvidia-tesla-470-vulkan-icd [i386 amd64 arm64 ppc64el]
 Conflicts:
  libgl1-${nvidia}-glx,
@@ -761,11 +765,11 @@ Recommends:
  lib${nvidia}-rtcore (= ${binary:Version}) [!i386 !ppc64el],
 Suggests:
  vulkan-tools,
-Enhances:
- libvulkan1,
-Provides:
- vulkan-icd,
- nvidia-vulkan-icd-any,
+#Enhances:
+# libvulkan1,
+#Provides:
+# vulkan-icd,
+# nvidia-vulkan-icd-any,
 Conflicts:
  ${nvidia}-nonglvnd-vulkan-icd,
 Description: NVIDIA Vulkan installable client driver (ICD)${nvidia:VariantDesc}
@@ -818,13 +822,14 @@ Package: ${nvidia}-smi
 Section: non-free/utils
 Architecture: amd64 ${arch:arm64} ${arch:ppc64el}
 Depends:
+ nvidia-smi,
  ${nvidia}-alternative (= ${binary:Version}),
  lib${nvidia}-ml1 (= ${binary:Version}),
  ${shlibs:Depends}, ${misc:Depends}
-Recommends:
- ${nvidia:kmod:binary},
-Suggests:
- ${nvidia:kmod:source},
+#Recommends:
+# ${nvidia:kmod:binary},
+#Suggests:
+# ${nvidia:kmod:source},
 Description: NVIDIA System Management Interface${nvidia:VariantDesc}
  The NVIDIA Management Library (NVML) provides a monitoring and management API.
  The application "nvidia-smi" is the NVIDIA System Management Interface (NVSMI)
@@ -841,8 +846,8 @@ Pre-Depends:
 Depends:
  ${nvidia}-alternative (= ${binary:Version}),
  ${shlibs:Depends}, ${misc:Depends}
-Provides:
- libnvidia-ml.so.1 (= ${nvidia:Version}),
+#Provides:
+# libnvidia-ml.so.1 (= ${nvidia:Version}),
 Homepage: https://developer.nvidia.com/nvidia-management-library-NVML
 Description: NVIDIA Management Library (NVML) runtime library${nvidia:VariantDesc}
  The NVIDIA Management Library (NVML) provides a monitoring and management API.
@@ -852,7 +857,7 @@ Description: NVIDIA Management Library (NVML) runtime library${nvidia:VariantDes
 
 Package: nvidia-powerd
 Section: non-free/utils
-Architecture: amd64
+Architecture: #amd64
 Depends:
  ${shlibs:Depends}, ${misc:Depends}
 Description: NVIDIA Dynamic Boost (daemon)
@@ -888,50 +893,51 @@ Pre-Depends:
  ${nvidia:legacy-check},
  ${misc:Pre-Depends}
 Depends:
+ libcuda1,
  nvidia-support,
  ${nvidia}-alternative (= ${binary:Version}),
  lib${nvidia}-ptxjitcompiler1 (= ${binary:Version}),
  ${shlibs:Depends}, ${misc:Depends}
-Recommends:
- ${nvidia:kmod:binary},
- ${nvidia}-smi [${nvidia:archlist:driver}],
-# help nvidia-persistenced by pre-selecting the correct provider for libnvidia-cfg1-any
- lib${nvidia}-cfg1 (= ${binary:Version}) [${nvidia:archlist:driver}],
- nvidia-persistenced [${nvidia:archlist:driver}],
- ${libcuda1}:i386 (= ${binary:Version}) [amd64],
-Suggests:
- nvidia-cuda-mps [${nvidia:archlist:driver}],
- ${nvidia:kmod:source},
-Provides:
- libcuda.so.1 (= ${nvidia:Version}),
- libcuda1-any,
- libcuda-5.0-1,
- libcuda-5.0-1-i386 [i386],
- libcuda-5.5-1,
- libcuda-5.5-1-i386 [i386],
- libcuda-6.0-1,
- libcuda-6.0-1-i386 [i386],
- libcuda-6.5-1,
- libcuda-6.5-1-i386 [i386],
- libcuda-7.0-1,
- libcuda-7.5-1,
- libcuda-8.0-1,
- libcuda-9.0-1,
- libcuda-9.1-1,
- libcuda-9.2-1,
- libcuda-10.0-1,
- libcuda-10.1-1,
- libcuda-10.2-1,
- libcuda-11.0-1,
- libcuda-11.1-1,
- libcuda-11.2-1,
- libcuda-11.3-1,
- libcuda-11.4-1,
- libcuda-11.5-1,
- libcuda-11.6-1,
- libcuda-11.7-1,
- libcuda-11.8-1,
- libcuda-12.0-1,
+#Recommends:
+# ${nvidia:kmod:binary},
+# ${nvidia}-smi [${nvidia:archlist:driver}],
+## help nvidia-persistenced by pre-selecting the correct provider for libnvidia-cfg1-any
+# lib${nvidia}-cfg1 (= ${binary:Version}) [${nvidia:archlist:driver}],
+# nvidia-persistenced [${nvidia:archlist:driver}],
+# ${libcuda1}:i386 (= ${binary:Version}) [amd64],
+#Suggests:
+# nvidia-cuda-mps [${nvidia:archlist:driver}],
+# ${nvidia:kmod:source},
+#Provides:
+# libcuda.so.1 (= ${nvidia:Version}),
+# libcuda1-any,
+# libcuda-5.0-1,
+# libcuda-5.0-1-i386 [i386],
+# libcuda-5.5-1,
+# libcuda-5.5-1-i386 [i386],
+# libcuda-6.0-1,
+# libcuda-6.0-1-i386 [i386],
+# libcuda-6.5-1,
+# libcuda-6.5-1-i386 [i386],
+# libcuda-7.0-1,
+# libcuda-7.5-1,
+# libcuda-8.0-1,
+# libcuda-9.0-1,
+# libcuda-9.1-1,
+# libcuda-9.2-1,
+# libcuda-10.0-1,
+# libcuda-10.1-1,
+# libcuda-10.2-1,
+# libcuda-11.0-1,
+# libcuda-11.1-1,
+# libcuda-11.2-1,
+# libcuda-11.3-1,
+# libcuda-11.4-1,
+# libcuda-11.5-1,
+# libcuda-11.6-1,
+# libcuda-11.7-1,
+# libcuda-11.8-1,
+# libcuda-12.0-1,
 Homepage: https://www.nvidia.com/CUDA
 Description: NVIDIA CUDA Driver Library${nvidia:VariantDesc}
  The Compute Unified Device Architecture (CUDA) enables NVIDIA
@@ -1135,7 +1141,6 @@ Depends:
  ${misc:Depends}
 Suggests:
  ${nvidia}-opencl-icd [i386 amd64 ${arch:arm64} ${arch:ppc64el}]
- | nvidia-tesla-opencl-icd [i386 amd64 arm64 ppc64el]
  | nvidia-tesla-470-opencl-icd [i386 amd64 arm64 ppc64el]
 Description: NVIDIA OpenCL driver - common files
  OpenCL (Open Computing Language) is a multivendor open standard for
@@ -1158,10 +1163,10 @@ Depends:
  lib${nvidia}-compiler (= ${binary:Version}) [!arm64 !ppc64el],
  lib${nvidia}-nvvm4 (= ${binary:Version}),
  ${shlibs:Depends}, ${misc:Depends}
-Enhances:
- libopencl1,
-Provides:
- opencl-icd,
+#Enhances:
+# libopencl1,
+#Provides:
+# opencl-icd,
 Description: NVIDIA OpenCL installable client driver (ICD)${nvidia:VariantDesc}
  OpenCL (Open Computing Language) is a multivendor open standard for
  general-purpose parallel programming of heterogeneous systems that include
@@ -1212,5 +1217,5 @@ Depends:
 Description: NVIDIA GPU detection utility
  The 'nvidia-detect' script in this package checks for an NVIDIA GPU in the
  system and recommends one of the non-free accelerated driver meta-packages
- (nvidia-driver, nvidia-tesla-driver,
+ (nvidia-driver,
  or nvidia-tesla-470-driver) for installation.

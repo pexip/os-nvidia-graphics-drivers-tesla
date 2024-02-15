@@ -8,4 +8,6 @@ version=4
 
 #opts=component=amd64 \
 #https://download.nvidia.com/XFree86/Linux-x86_64/(525(?:\.[\d\.\-]+)?)/NVIDIA-Linux-x86_64-(\d[\d\.\-]*)\.run
-opts=searchmode=plain https://docs.nvidia.com/datacenter/tesla/index.html Version.(525(?:\.[\d\.\-]+)?)
+
+opts=searchmode=plain \
+https://docs.nvidia.com/datacenter/tesla/index.html Version.(525(?:\.[\d\.\-]+)?)
