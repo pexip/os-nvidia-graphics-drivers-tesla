@@ -99,7 +99,7 @@ if [ "$1" = "triggered" ]; then
 	fi
 	normal_alternative=0
 	open_alternative=0
-	if echo "DISABLED" | grep -q "slave" ; then
+	if echo "$slaves" | grep -q "slave" ; then
 		if echo "${kmod_slaves}" | grep -q "slave" ; then
 			normal_alternative=1
 		fi
