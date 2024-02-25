@@ -27,7 +27,7 @@ License: zlib/libpng
 Files: debian/*
 Copyright: 2001-2010 Randall Donald <rdonald@debian.org>
            2009-2010 Andres Mejia <mcitadel@gmail.com>
-           2009-2023 Andreas Beckmann <anbe@debian.org>
+           2009-2024 Andreas Beckmann <anbe@debian.org>
            2010-2011 Russ Allbery <rra@debian.org>
            2014-2015 Vincent Cheng <vcheng@debian.org>
            2015-2019 Luca Boccassi <bluca@debian.org>
@@ -36,8 +36,9 @@ Copyright: 2001-2010 Randall Donald <rdonald@debian.org>
 License: GPL-2.0+
 
 Files: debian/detect/nvidia-detect.in
-Copyright: © 2008-2011 Filipus Klutiero <chealer@gmail.com>
-           © 2011-2022 Andreas Beckmann <anbe@debian.org>
+Copyright:
+ © 2008-2011 Filipus Klutiero <chealer@gmail.com>
+ © 2011-2024 Andreas Beckmann <anbe@debian.org>
 License: GPL-2.0+
 
 Files: debian/patches/*

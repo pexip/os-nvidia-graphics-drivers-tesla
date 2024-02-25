@@ -10,3 +10,11 @@ Restrictions:
  needs-root,
  breaks-testbed,
  allow-stderr,
+
+Test-Command: nvidia-detect && nvidia-detect 10DE1340 0000
+Features: test-name=nvidia-detect
+Architecture: amd64 arm64 ppc64el
+Depends:
+ nvidia-detect,
+Restrictions:
+ superficial,

@@ -80,7 +80,7 @@ Forwarded: not-needed
  
  Each GOM is designed to meet specific user needs.
  
-@@ -927,7 +927,7 @@ Please note that for boards without INA
+@@ -958,7 +958,7 @@ Please note that for boards without INA
  
  .TP 15
  .B "Power Limit"
@@ -89,7 +89,7 @@ Forwarded: not-needed
  Only available if power management is supported.
  Requires Inforom PWR object version 3.0 or higher or Kepler device.
  On Kepler devices Power Limit can be adjusted using \-pl,\-\-power\-limit= switches.
-@@ -1753,7 +1753,7 @@ Query power hint with graphics clock, me
+@@ -1787,7 +1787,7 @@ Query power hint with graphics clock, me
  .PP
  .SH "UNIT ATTRIBUTES"
  .PP
@@ -98,7 +98,7 @@ Forwarded: not-needed
  Unless otherwise noted all numerical results are base 10 and unitless.
  
  .SS "Timestamp"
-@@ -1865,7 +1865,7 @@ For all S-class products.
+@@ -1899,7 +1899,7 @@ For all S-class products.
  .PP
  .SH "NOTES"
  .PP
@@ -107,7 +107,7 @@ Forwarded: not-needed
  Please see the relevant section of the driver README file.
  
  .PP
-@@ -1883,7 +1883,7 @@ Query UUID and persistence mode of all G
+@@ -1917,7 +1917,7 @@ Query UUID and persistence mode of all G
  Query ECC errors and power consumption for GPU 0 at a frequency of 10 seconds, indefinitely, and record to the file out.log.
  .SS
  "nvidia\-smi -c 1 -i GPU\-b2f5f1b745e3d23d\-65a3a26d-097db358\-7303e0b6\-149642ff3d219f8587cde3a8"
@@ -116,7 +116,7 @@ Forwarded: not-needed
  .SS "nvidia\-smi -q -u -x --dtd"
  Query attributes for all Units once, and display in XML format with embedded DTD to stdout.
  .SS "nvidia\-smi --dtd -u -f nvsmi_unit.dtd"
-@@ -2136,13 +2136,13 @@ Query power hint with graphics clock at
+@@ -2170,13 +2170,13 @@ Query power hint with graphics clock at
    * Added support for K40d and K80.
  .PP 1
  
@@ -132,7 +132,7 @@ Forwarded: not-needed
  .PP 1
  
    * Added support for displaying the GPU encoder and decoder utilizations
-@@ -2175,19 +2175,19 @@ Query power hint with graphics clock at
+@@ -2209,19 +2209,19 @@ Query power hint with graphics clock at
   
  .PP 1
  
@@ -155,7 +155,7 @@ Forwarded: not-needed
  .PP 1
  
   
-@@ -2196,13 +2196,13 @@ Query power hint with graphics clock at
+@@ -2230,13 +2230,13 @@ Query power hint with graphics clock at
    * Added reporting of Display Active state and updated documentation to clarify how it differs from Display Mode and Display Active state
  .PP 1
  
@@ -172,7 +172,7 @@ Forwarded: not-needed
  .PP 1
  
    * Renamed Clock Throttle Reason User Defined Clocks to Applications Clocks Setting
-@@ -2211,16 +2211,16 @@ Query power hint with graphics clock at
+@@ -2245,16 +2245,16 @@ Query power hint with graphics clock at
    * On error, return codes have distinct non zero values for each error class. See RETURN VALUE section
  .PP 1
  
@@ -192,7 +192,7 @@ Forwarded: not-needed
  .PP 1
  
    * Added the enforced power limit to the query output
-@@ -2229,7 +2229,7 @@ Query power hint with graphics clock at
+@@ -2263,7 +2263,7 @@ Query power hint with graphics clock at
   
  .PP 1
  
@@ -201,7 +201,7 @@ Forwarded: not-needed
  .PP 1
  
   
-@@ -2238,13 +2238,13 @@ Query power hint with graphics clock at
+@@ -2272,13 +2272,13 @@ Query power hint with graphics clock at
    * Added reporting of GPU Operation Mode (GOM)
  .PP 1
  
@@ -217,7 +217,7 @@ Forwarded: not-needed
  .PP 1
  
   
-@@ -2259,10 +2259,10 @@ Query power hint with graphics clock at
+@@ -2293,10 +2293,10 @@ Query power hint with graphics clock at
    * Better error handling when NVML shared library is not present in the system
  .PP 1
  
@@ -230,7 +230,7 @@ Forwarded: not-needed
  .PP 1
  
    * When reporting free memory, calculate it from the rounded total and used memory so that values add up
-@@ -2271,7 +2271,7 @@ Query power hint with graphics clock at
+@@ -2305,7 +2305,7 @@ Query power hint with graphics clock at
    * Added reporting of power management limit constraints and default limit
  .PP 1
  
@@ -239,7 +239,7 @@ Forwarded: not-needed
  .PP 1
  
    * Added reporting of texture memory ECC errors
-@@ -2283,7 +2283,7 @@ Query power hint with graphics clock at
+@@ -2317,7 +2317,7 @@ Query power hint with graphics clock at
   
  .PP 1
  
@@ -248,7 +248,7 @@ Forwarded: not-needed
  .PP 1
  
   
-@@ -2295,7 +2295,7 @@ Query power hint with graphics clock at
+@@ -2329,7 +2329,7 @@ Query power hint with graphics clock at
    * When running commands on multiple GPUs at once N/A errors are treated as warnings.
  .PP 1
  
@@ -257,7 +257,7 @@ Forwarded: not-needed
  .PP 1
  
    * UUID format changed to match UUID standard and will report a different value.
-@@ -2304,7 +2304,7 @@ Query power hint with graphics clock at
+@@ -2338,7 +2338,7 @@ Query power hint with graphics clock at
   
  .PP 1
  
@@ -266,7 +266,7 @@ Forwarded: not-needed
  .PP 1
  
   
-@@ -2313,7 +2313,7 @@ Query power hint with graphics clock at
+@@ -2347,7 +2347,7 @@ Query power hint with graphics clock at
    * Report VBIOS version.
  .PP 1
  
@@ -275,7 +275,7 @@ Forwarded: not-needed
  .PP 1
  
    * Added reporting of PCI Sub System ID
-@@ -2322,13 +2322,13 @@ Query power hint with graphics clock at
+@@ -2356,13 +2356,13 @@ Query power hint with graphics clock at
    * Updated docs to indicate we support M2075 and C2075
  .PP 1
  
@@ -291,7 +291,7 @@ Forwarded: not-needed
  .PP 1
  
    * Added message when NVIDIA driver is not running
-@@ -2340,19 +2340,19 @@ Query power hint with graphics clock at
+@@ -2374,19 +2374,19 @@ Query power hint with graphics clock at
    * Getting pending driver model works on non-admin
  .PP 1
  
@@ -315,7 +315,7 @@ Forwarded: not-needed
  .PP 1
  
    * Changed versioning scheme to also include "driver version"
-@@ -2361,10 +2361,10 @@ Query power hint with graphics clock at
+@@ -2395,10 +2395,10 @@ Query power hint with graphics clock at
    * XML format always conforms to DTD, even when error conditions occur
  .PP 1
  

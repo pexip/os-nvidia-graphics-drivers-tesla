@@ -23,6 +23,7 @@ NVIDIA_SETTINGS		?= nvidia-settings$(-variant) (>= $(NVIDIA_MAJOR))
 ARCH_CANDIDATES		?= amd64 i386 armhf arm64 ppc64el
 ARCH_LIST		?= amd64
 NO_DRIVER_ARCH_LIST	?=
+NO_TARBALL_ARCH_LIST	?=
 NO_AUTOPKGTEST_ARCH_LIST?=
 NO_GSP_ARCH_LIST	?=
 
@@ -55,6 +56,7 @@ watch_pattern		 = $(or $(WATCH_PATTERN),$(if $(WATCH_VERSION),$(WATCH_VERSION)(?
 debhelper_compat	:= $(shell sed -rn 's/.*debhelper-compat \(= ([0-9]+)\).*/\1/p' debian/control)
 has_driver		 = $(filter $(DEB_HOST_ARCH),$(DRIVER_ARCH_LIST))
 DRIVER_ARCH_LIST	 = $(filter-out $(NO_DRIVER_ARCH_LIST),$(ARCH_LIST))
+TARBALL_ARCH_LIST	 = $(filter-out $(NO_TARBALL_ARCH_LIST),$(DRIVER_ARCH_LIST))
 AUTOPKGTEST_ARCH_LIST	 = $(filter-out $(NO_AUTOPKGTEST_ARCH_LIST),$(DRIVER_ARCH_LIST))
 GSP_ARCH_LIST		 = $(filter-out $(NO_GSP_ARCH_LIST),$(DRIVER_ARCH_LIST))
 
@@ -166,8 +168,9 @@ NVIDIA-Linux-ppc64el: NVIDIA-Linux-amd64
 	cp -al $</*.json* $@
 endif
 
-# Unpack all architectures, we may need files from all of them.
-unpack-stamp: $(patsubst %,NVIDIA-Linux-%,$(ARCH_LIST))
+# Always unpack amd64, we need files from them.
+unpack-stamp: NVIDIA-Linux-amd64
+unpack-stamp: NVIDIA-Linux-$(DEB_HOST_ARCH)
 	$(if $(filter $(DEB_HOST_ARCH),$(ARCH_LIST)),,$(error Architecture $(DEB_HOST_ARCH) unsupported.))
 	dh_testdir
 	$(RM) NVIDIA-Linux
@@ -190,7 +193,7 @@ nv-readme.ids: unpack-stamp
 		: "*** Supported PCI IDs have changed. See diff above. Aborting. ***"; \
 		exit 1 ; \
 	fi
-ifneq (,$(variant))
+ifneq (,$(variant:tesla=))
 	@set -e -x ; \
 	if ! cmp -s debian/detect/$(nvidia).ids $@ ; then \
 		diff -u debian/detect/$(nvidia).ids $@ || true ; \
@@ -341,7 +344,7 @@ override_dh_bugfiles:
 
 override_dh_shlibdeps:
 	dh_shlibdeps -l/$(libdir)/$(nvidia_private)
-	test -z "$$(ls debian/*.substvars 2>/dev/null)" || sed -r -i 's/libnvidia-(e?glcore)-$(version)/lib$(nvidia)-\1 (= $${binary:Version})/g' debian/*.substvars
+	test -z "$$(ls debian/*.substvars 2>/dev/null)" || sed -r -i 's/libnvidia-(e?glcore)-$(version)/LIB$(nvidia)-\1 (= $${binary:Version}) | LIBnvidia-\1-$(version)/g; s/lib$(nvidia)-(e?glcore)/LIB$(nvidia)-\1 | LIBnvidia-\1-$(version)/g; s/LIBnvidia/libnvidia/g' debian/*.substvars
 
 override_dh_gencontrol:
 	dh_gencontrol -- \
@@ -482,7 +485,7 @@ pci.ids.nvidia: /usr/share/misc/pci.ids
 	done > $@
 
 # only invoked manually
-file-lists: $(patsubst %,debian/files_$(NVIDIA_RELEASE)_%,$(DRIVER_ARCH_LIST))
+file-lists: $(patsubst %,debian/files_$(NVIDIA_RELEASE)_%,$(TARBALL_ARCH_LIST))
 debian/files_$(NVIDIA_RELEASE)_%: NVIDIA-Linux-%
 	(cd $< && find .) | sed 's/$(NVIDIA_RELEASE)/VERSION/g' | sort > $@
 
@@ -563,7 +566,7 @@ endif
 
 UPSTREAM_NAME		 = nvidia-graphics-drivers
 UPSTREAM_VERSION	 = $(NVIDIA_RELEASE)
-TARBALL_LIST		 = $(foreach a,empty $(DRIVER_ARCH_LIST),$(call get_tarball,$a))
+TARBALL_LIST		 = $(foreach a,empty $(TARBALL_ARCH_LIST),$(call get_tarball,$a))
 
 GIT			?= git
 TARBALL_REPOSITORY	 = https://salsa.debian.org/nvidia-team/tarballs-$(UPSTREAM_NAME).git

@@ -52,12 +52,12 @@ define PACKAGE_STATUS
 	nvidia-cuda-mps
 	nvidia-powerd
 	nvidia-suspend-common
+	nvidia-modprobe
 	nvidia-settings$(-variant)
 	nvidia-xconfig
+	nvidia-persistenced
 	nvidia-support
 	nvidia-kernel-common
-	nvidia-modprobe
-	nvidia-persistenced
 	xserver-xorg
 	xserver-xorg-core
 	xserver-xorg-legacy
