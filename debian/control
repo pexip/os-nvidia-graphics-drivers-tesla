@@ -36,7 +36,7 @@ Package: nvidia-tesla-driver
 Section: non-free/x11
 Architecture: amd64 arm64 ppc64el
 Depends:
- nvidia-driver,
+# nvidia-driver,
  ${misc:Depends}
 Description: NVIDIA metapackage${nvidia:VariantDesc}
  This metapackage depends on the NVIDIA binary driver and libraries
@@ -133,7 +133,7 @@ Section: non-free/kernel
 Architecture: amd64 arm64 ppc64el
 Multi-Arch: foreign
 Depends:
- nvidia-kernel-dkms,
+# nvidia-kernel-dkms,
  ${misc:Depends}
 Description: NVIDIA binary kernel module DKMS source${nvidia:VariantDesc}
  This package builds the NVIDIA binary kernel modules needed by
@@ -160,7 +160,7 @@ Package: nvidia-tesla-kernel-source
 Section: non-free/kernel
 Architecture: amd64 arm64 ppc64el
 Depends:
- nvidia-kernel-source,
+# nvidia-kernel-source,
  ${misc:Depends}
 Description: NVIDIA binary kernel module source${nvidia:VariantDesc}
  This package provides the source for the NVIDIA binary kernel modules
@@ -186,7 +186,7 @@ Package: xserver-xorg-video-nvidia-tesla
 Section: non-free/x11
 Architecture: amd64 arm64 ppc64el
 Depends:
- xserver-xorg-video-nvidia,
+# xserver-xorg-video-nvidia,
  ${nvidia}-alternative (= ${binary:Version}),
  ${shlibs:Depends}, ${misc:Depends}
 Description: NVIDIA binary Xorg driver${nvidia:VariantDesc}
@@ -242,7 +242,7 @@ Multi-Arch: same
 Pre-Depends:
  ${misc:Pre-Depends}
 Depends:
- libnvidia-cfg1,
+# libnvidia-cfg1,
  ${nvidia}-alternative (= ${binary:Version}),
  ${shlibs:Depends}, ${misc:Depends}
 Description: NVIDIA binary OpenGL/GLX configuration library${nvidia:VariantDesc}
@@ -535,7 +535,7 @@ Package: nvidia-tesla-smi
 Section: non-free/utils
 Architecture: amd64 arm64 ppc64el
 Depends:
- nvidia-smi,
+# nvidia-smi,
  ${nvidia}-alternative (= ${binary:Version}),
  lib${nvidia}-ml1 (= ${binary:Version}),
  ${shlibs:Depends}, ${misc:Depends}
@@ -569,7 +569,7 @@ Pre-Depends:
  ${nvidia:legacy-check},
  ${misc:Pre-Depends}
 Depends:
- libcuda1,
+# libcuda1,
  nvidia-support,
  ${nvidia}-alternative (= ${binary:Version}),
  lib${nvidia}-ptxjitcompiler1 (= ${binary:Version}),

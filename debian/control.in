@@ -35,7 +35,7 @@ Architecture: amd64 ${arch:arm64} ${arch:ppc64el}
 # nvidia-installer-cleanup,
 # ${nvidia:legacy-check},
 Depends:
- nvidia-driver,
+# nvidia-driver,
 # ${nvidia}-driver-libs (= ${binary:Version}),
 # ${nvidia}-driver-bin (= ${binary:Version}),
 # xserver-xorg-video-${nvidia} (= ${binary:Version}),
@@ -153,7 +153,7 @@ Multi-Arch: foreign
 #Pre-Depends:
 # nvidia-installer-cleanup,
 Depends:
- nvidia-kernel-dkms,
+# nvidia-kernel-dkms,
 # firmware-${nvidia}-gsp (= ${nvidia:Version}) [${nvidia:archlist:gsp}] | firmware-nvidia-gsp-${nvidia:Version} [${nvidia:archlist:gsp}],
 # ${nvidia-kernel}-support--v1,
  ${misc:Depends}
@@ -188,7 +188,7 @@ Package: ${nvidia-kernel}-source
 Section: non-free/kernel
 Architecture: amd64 ${arch:arm64} ${arch:ppc64el}
 Depends:
- nvidia-kernel-source,
+# nvidia-kernel-source,
 # debhelper-compat (= ${nvidia:debhelper-compat}),
 # module-assistant,
  ${misc:Depends}
@@ -224,7 +224,7 @@ Architecture: amd64 ${arch:arm64} ${arch:ppc64el}
 # nvidia-installer-cleanup,
 # ${nvidia:legacy-check},
 Depends:
- xserver-xorg-video-nvidia,
+# xserver-xorg-video-nvidia,
  ${nvidia}-alternative (= ${binary:Version}),
 # nvidia-support,
 # ${nvidia:xorgDepends},
@@ -304,7 +304,7 @@ Multi-Arch: same
 Pre-Depends:
  ${misc:Pre-Depends}
 Depends:
- libnvidia-cfg1,
+# libnvidia-cfg1,
  ${nvidia}-alternative (= ${binary:Version}),
  ${shlibs:Depends}, ${misc:Depends}
 #Provides:
@@ -822,7 +822,7 @@ Package: ${nvidia}-smi
 Section: non-free/utils
 Architecture: amd64 ${arch:arm64} ${arch:ppc64el}
 Depends:
- nvidia-smi,
+# nvidia-smi,
  ${nvidia}-alternative (= ${binary:Version}),
  lib${nvidia}-ml1 (= ${binary:Version}),
  ${shlibs:Depends}, ${misc:Depends}
@@ -893,7 +893,7 @@ Pre-Depends:
  ${nvidia:legacy-check},
  ${misc:Pre-Depends}
 Depends:
- libcuda1,
+# libcuda1,
  nvidia-support,
  ${nvidia}-alternative (= ${binary:Version}),
  lib${nvidia}-ptxjitcompiler1 (= ${binary:Version}),
